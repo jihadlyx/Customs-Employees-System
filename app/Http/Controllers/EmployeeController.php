@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Employee;
 use Illuminate\Http\Request;
 
 class EmployeeController extends Controller
@@ -11,7 +12,8 @@ class EmployeeController extends Controller
      */
     public function index()
     {
-        return view("employees.employees");
+        $employes = Employee::all();
+        return view('employees.employees', compact('employes'));
     }
 
     /**
@@ -27,7 +29,10 @@ class EmployeeController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $this->validate($request, []);
+        $employes = Employee::create($request->all());
+        return redirect()->route('')->with('success', '');
     }
 
     /**
@@ -43,7 +48,7 @@ class EmployeeController extends Controller
      */
     public function edit(string $id)
     {
-//        return view('employees.edit_employee');
+        //        return view('employees.edit_employee');
     }
 
     /**
@@ -51,7 +56,12 @@ class EmployeeController extends Controller
      */
     public function update(Request $request, string $id)
     {
-//        return view('employees.edit_employee');
+        $this->validate($request, []);
+        $employes = Employee::find($id);
+        $employes->update($request->all());
+        return redirect()
+            ->route("jop_title.index")
+            ->with('success', "تم التعديل بنجاح");
     }
 
     /**
@@ -59,6 +69,7 @@ class EmployeeController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Employee::destroy($id);
+        return redirect()->route("jop_title.index");
     }
 }

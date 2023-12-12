@@ -9,17 +9,18 @@
 @section('settings-content')
     <div class="wrapper-two">
         <h3 class="title-main">إضافة المسمى الوظيفي || الشريحة</h3>
-        <form class="row g-4 needs-validation" novalidate>
+        <form method="post"  action="{{route("jop_title.store")}}" class="row g-4 needs-validation" novalidate>
+            @csrf
             <div class="col-md-2">
                 <label for="validationCustom02" class="form-label">رقم</label>
-                <input type="text" class="form-control" id="validationCustom02" required>
+                <input name="id_jop" type="text" class="form-control" id="validationCustom02" required>
                 <div class="valid-feedback">
                     Looks good!
                 </div>
             </div>
             <div class="col-md-2">
                 <label for="validationCustom02" class="form-label">المسمى الوظيفي</label>
-                <input type="text" class="form-control" id="validationCustom02" required>
+                <input name="title_jop" type="text" class="form-control" id="validationCustom02" required>
                 <div class="valid-feedback">
                     Looks good!
                 </div>
@@ -39,34 +40,23 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
-                    <td class="d-flex justify-content-center align-items-center">
-                        <a href="jop_title/show" class="edit">
-                            <i class="fa-solid fa-pencil"></i>
-                        </a>
-                        <form action="../../PHP/script.php" method="POST">
-                            <button type="submit" style="border:none; outline:none" class="delete" name="Delete" value="1">
+                @foreach ($jops as $jop )
+                    <tr>
+                        <td class="d-flex justify-content-center align-items-center">
+                            <!-- Button to Open the Modal -->
+                            <button type="button" class="edit" data-bs-toggle="modal" data-bs-target="#JopEdit{{$jop->id_jop}}" data-bs-whatever="@mdo">
+                                <i class="fa-solid fa-edit"></i>
+                            </button>
+                            <button type="button" class="delete" data-bs-toggle="modal" data-bs-target="#JopDelete{{$jop->id_jop}}" data-bs-whatever="@mdo">
                                 <i class="fa-solid fa-trash-can"></i>
                             </button>
-                        </form>
-                    </td>
-                    <td>1</td>
-                    <td>جهاد شرع الله</td>
-                </tr>
-                <tr>
-                    <td class="d-flex justify-content-center align-items-center">
-                        <a href="jop_title/show" class="edit">
-                            <i class="fa-solid fa-pencil"></i>
-                        </a>
-                        <form action="../../PHP/script.php" method="POST">
-                            <button type="submit" style="border:none; outline:none" class="delete" name="Delete" value="1">
-                                <i class="fa-solid fa-trash-can"></i>
-                            </button>
-                        </form>
-                    </td>
-                    <td>2</td>
-                    <td>علي</td>
-                </tr>
+                        </td>
+                        <td>{{$jop->id_jop}}</td>
+                        <td>{{$jop->title_jop}}</td>
+                    </tr>
+                    @include('settings.jop_title.modal.edit_jop')
+                    @include('settings.jop_title.modal.delete_jop')
+                @endforeach
                 </tbody>
             </table>
         </div>

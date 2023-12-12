@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\City;
+use App\Models\Station;
 use Illuminate\Http\Request;
 
 class StationController extends Controller
@@ -11,7 +13,10 @@ class StationController extends Controller
      */
     public function index()
     {
-        return view('settings.stations.stations');
+        $stations = Station::all();
+        $cities = City::all();
+        return view('settings.stations.stations' , compact('cities','stations'));
+//        return $stations->city->id_city;
     }
 
     /**
@@ -27,7 +32,19 @@ class StationController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try {
+            $data = [
+                'id_station' => $request->id_station,
+                'name_station' => $request->name_station,
+                'id_city' => $request->id_city
+            ];
+
+            Station::create($data);
+        } catch (\Throwable $th) {
+           return redirect()->back()->with('error', $th->getMessage());
+        }
+
+    return redirect()->route("stations.index");
     }
 
     /**
@@ -51,7 +68,16 @@ class StationController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $station = Station::find($id);
+        ['id_station','name_station' ,'id_city'];
+        $data = [
+            "name_station" => $request->name_station,
+             "id_city" => $request->id_city
+        ];
+        $station->update($data);
+        return redirect()
+            ->route("stations.index")
+            ->with('success', "تم التعديل بنجاح");
     }
 
     /**
@@ -59,6 +85,8 @@ class StationController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        Station::destroy($id);
+        return redirect()->route("stations.index");
     }
+
 }

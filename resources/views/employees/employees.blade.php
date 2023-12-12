@@ -11,7 +11,7 @@
     <div class="wrapper-two">
         <h3 class="title-main">إدارة الموظفين</h3>
         <hr>
-        <div class="content-wrapper">
+        <div class="content-wrapper h-100">
             <div class="wrapper-two">
                 <form class="row g-4 needs-validation" novalidate>
                     <div class="col-md-2">
@@ -42,7 +42,15 @@
             </div>
             <div class="card-header">
                 <h1 class="title">كل الموظفين</h1>
-                <a href="employees/create">إضافة موظف</a>
+                <div class="card-btn">
+                    <button class="btn btn-success">اختر</button>
+                    <button class="btn btn-dark">تحديد الكل</button>
+                    <button class="btn btn-primary">طباعة</button>
+                    <a href="{{route('certs.index')}}" class="btn btn-danger">عرض المؤهل العلمي</a>
+                    <a href="{{route('absence.index')}}" class="btn btn-warning">عرض سجل الغياب</a>
+{{--                    <button href="">تحديد الكل</button>--}}
+                </div>
+                <a class="add" href="employees/create">إضافة موظف</a>
             </div>
             <div class="box-table">
                 <table >
@@ -80,411 +88,52 @@
                     </tr>
                     </thead>
                     <tbody>
+                    @foreach ($employes as $employee )
                     <tr>
                         <td class="text-center">
                             <form action="">
-                                <input type="checkbox" style="width: 16px; height: 16px;    ">
+                                <input type="checkbox" value="true" style="width: 16px; height: 16px;    ">
+                                <input type="checkbox" value="true" class="d-none" style="width: 16px; height: 16px;    ">
                             </form>
                         </td>
                         <td class="d-flex justify-content-center align-items-center">
+
                             <a href="#" class="edit print h-100" >
                                 <i class="fa-solid fa-print"></i>
                             </a>
                             <a href="employees/edit" class="edit">
                                 <i class="fa-solid fa-pencil"></i>
                             </a>
-                            <form action="../../PHP/script.php" method="POST">
-                                <button type="submit" style="border:none; outline:none" class="delete" name="Delete" value="1">
-                                    <i class="fa-solid fa-trash-can"></i>
-                                </button>
-                            </form>
+
+                            <button  type="button" class="delete" data-bs-toggle="modal" data-bs-target="#EmpDelete" data-bs-whatever="@mdo">
+                                <i class="fa-solid fa-trash-can"></i>
+                            </button>
+                            <button type="button" class="eye" data-bs-toggle="modal" data-bs-target="#EmpShow" data-bs-whatever="@mdo">
+                                <i class="fa-solid fa-eye"></i>
+                            </button>
                         </td>
-                        <td>1</td>
-                        <td>جهاد شرع الله</td>
+                        <td>{{$employee->id_emp}}</td>
+                        <td>{{$employee->name}}</td>
+                        <td>-----</td>
+                        <td>-----</td>
+                        <td>-----</td>
+                        <td>{{$employee->rank_id}}</td>
+                        {{-- <td>{{$employee->id_emp}}</td>
+                        <td>{{$employee->name}}</td>
+                        <td>{{$employee->id_emp}}</td>
+                        <td>{{$employee->name}}</td>
+                        <td>{{$employee->id_emp}}</td>
+                        <td>{{$employee->name}}</td> --}}
                         <td>اعزب</td>
                         <td>ذكر</td>
                         <td>ليسبلس</td>
                         <td>1</td>
+                        {{-- protected $fillable = ['id_emp','PID_emp','name','phone','id_jop','status_id','emp_type_id','rank_id','image','id_station','isDeleted','start_date','stop_date','remotion_date','end_duty_resson']; --}}
 
+                        @include('employees.modal.show_emp')
+                        @include('employees.modal.delete_emp')
                     </tr>
-                    <tr>
-                        <td class="text-center">
-                            <form action="">
-                                <input type="checkbox" style="width: 16px; height: 16px;    ">
-                            </form>
-                        </td>
-                        <td class="d-flex justify-content-center align-items-center">
-                            <a href="#" class="edit print h-100" >
-                                <i class="fa-solid fa-print"></i>
-                            </a>
-                            <a href="edit_emp.html" class="edit">
-                                <i class="fa-solid fa-pencil"></i>
-                            </a>
-                            <form action="../../PHP/script.php" method="POST">
-                                <button type="submit" style="border:none; outline:none" class="delete" name="Delete" value="1">
-                                    <i class="fa-solid fa-trash-can"></i>
-                                </button>
-                            </form>
-                        </td>
-                        <td>1</td>
-                        <td>جهاد شرع الله</td>
-                        <td>اعزب</td>
-                        <td>ذكر</td>
-                        <td>ليسبلس</td>
-                        <td>1</td>
-
-                    </tr>
-                    <tr>
-                        <td class="text-center">
-                            <form action="">
-                                <input type="checkbox" style="width: 16px; height: 16px;    ">
-                            </form>
-                        </td>
-                        <td class="d-flex justify-content-center align-items-center">
-                            <a href="#" class="edit print h-100" >
-                                <i class="fa-solid fa-print"></i>
-                            </a>
-                            <a href="edit_emp.html" class="edit">
-                                <i class="fa-solid fa-pencil"></i>
-                            </a>
-                            <form action="../../PHP/script.php" method="POST">
-                                <button type="submit" style="border:none; outline:none" class="delete" name="Delete" value="1">
-                                    <i class="fa-solid fa-trash-can"></i>
-                                </button>
-                            </form>
-                        </td>
-                        <td>1</td>
-                        <td>جهاد شرع الله</td>
-                        <td>اعزب</td>
-                        <td>ذكر</td>
-                        <td>ليسبلس</td>
-                        <td>1</td>
-
-                    </tr>
-                    <tr>
-                        <td class="text-center">
-                            <form action="">
-                                <input type="checkbox" style="width: 16px; height: 16px;    ">
-                            </form>
-                        </td>
-                        <td class="d-flex justify-content-center align-items-center">
-                            <a href="#" class="edit print h-100" >
-                                <i class="fa-solid fa-print"></i>
-                            </a>
-                            <a href="edit_emp.html" class="edit">
-                                <i class="fa-solid fa-pencil"></i>
-                            </a>
-                            <form action="../../PHP/script.php" method="POST">
-                                <button type="submit" style="border:none; outline:none" class="delete" name="Delete" value="1">
-                                    <i class="fa-solid fa-trash-can"></i>
-                                </button>
-                            </form>
-                        </td>
-                        <td>1</td>
-                        <td>جهاد شرع الله</td>
-                        <td>اعزب</td>
-                        <td>ذكر</td>
-                        <td>ليسبلس</td>
-                        <td>1</td>
-
-                    </tr>
-                    <tr>
-                        <td class="text-center">
-                            <form action="">
-                                <input type="checkbox" style="width: 16px; height: 16px;    ">
-                            </form>
-                        </td>
-                        <td class="d-flex justify-content-center align-items-center">
-                            <a href="#" class="edit print h-100" >
-                                <i class="fa-solid fa-print"></i>
-                            </a>
-                            <a href="edit_emp.html" class="edit">
-                                <i class="fa-solid fa-pencil"></i>
-                            </a>
-                            <form action="../../PHP/script.php" method="POST">
-                                <button type="submit" style="border:none; outline:none" class="delete" name="Delete" value="1">
-                                    <i class="fa-solid fa-trash-can"></i>
-                                </button>
-                            </form>
-                        </td>
-                        <td>1</td>
-                        <td>جهاد شرع الله</td>
-                        <td>اعزب</td>
-                        <td>ذكر</td>
-                        <td>ليسبلس</td>
-                        <td>1</td>
-
-                    </tr>
-                    <tr>
-                        <td class="text-center">
-                            <form action="">
-                                <input type="checkbox" style="width: 16px; height: 16px;    ">
-                            </form>
-                        </td>
-                        <td class="d-flex justify-content-center align-items-center">
-                            <a href="#" class="edit print h-100" >
-                                <i class="fa-solid fa-print"></i>
-                            </a>
-                            <a href="edit_emp.html" class="edit">
-                                <i class="fa-solid fa-pencil"></i>
-                            </a>
-                            <form action="../../PHP/script.php" method="POST">
-                                <button type="submit" style="border:none; outline:none" class="delete" name="Delete" value="1">
-                                    <i class="fa-solid fa-trash-can"></i>
-                                </button>
-                            </form>
-                        </td>
-                        <td>1</td>
-                        <td>جهاد شرع الله</td>
-                        <td>اعزب</td>
-                        <td>ذكر</td>
-                        <td>ليسبلس</td>
-                        <td>1</td>
-
-                    </tr>
-                    <tr>
-                        <td class="text-center">
-                            <form action="">
-                                <input type="checkbox" style="width: 16px; height: 16px;    ">
-                            </form>
-                        </td>
-                        <td class="d-flex justify-content-center align-items-center">
-                            <a href="#" class="edit print h-100" >
-                                <i class="fa-solid fa-print"></i>
-                            </a>
-                            <a href="edit_emp.html" class="edit">
-                                <i class="fa-solid fa-pencil"></i>
-                            </a>
-                            <form action="../../PHP/script.php" method="POST">
-                                <button type="submit" style="border:none; outline:none" class="delete" name="Delete" value="1">
-                                    <i class="fa-solid fa-trash-can"></i>
-                                </button>
-                            </form>
-                        </td>
-                        <td>1</td>
-                        <td>جهاد شرع الله</td>
-                        <td>اعزب</td>
-                        <td>ذكر</td>
-                        <td>ليسبلس</td>
-                        <td>1</td>
-
-                    </tr>
-                    <tr>
-                        <td class="text-center">
-                            <form action="">
-                                <input type="checkbox" style="width: 16px; height: 16px;    ">
-                            </form>
-                        </td>
-                        <td class="d-flex justify-content-center align-items-center">
-                            <a href="#" class="edit print h-100" >
-                                <i class="fa-solid fa-print"></i>
-                            </a>
-                            <a href="edit_emp.html" class="edit">
-                                <i class="fa-solid fa-pencil"></i>
-                            </a>
-                            <form action="../../PHP/script.php" method="POST">
-                                <button type="submit" style="border:none; outline:none" class="delete" name="Delete" value="1">
-                                    <i class="fa-solid fa-trash-can"></i>
-                                </button>
-                            </form>
-                        </td>
-                        <td>1</td>
-                        <td>جهاد شرع الله</td>
-                        <td>اعزب</td>
-                        <td>ذكر</td>
-                        <td>ليسبلس</td>
-                        <td>1</td>
-
-                    </tr>
-                    <tr>
-                        <td class="text-center">
-                            <form action="">
-                                <input type="checkbox" style="width: 16px; height: 16px;    ">
-                            </form>
-                        </td>
-                        <td class="d-flex justify-content-center align-items-center">
-                            <a href="#" class="edit print h-100" >
-                                <i class="fa-solid fa-print"></i>
-                            </a>
-                            <a href="edit_emp.html" class="edit">
-                                <i class="fa-solid fa-pencil"></i>
-                            </a>
-                            <form action="../../PHP/script.php" method="POST">
-                                <button type="submit" style="border:none; outline:none" class="delete" name="Delete" value="1">
-                                    <i class="fa-solid fa-trash-can"></i>
-                                </button>
-                            </form>
-                        </td>
-                        <td>1</td>
-                        <td>جهاد شرع الله</td>
-                        <td>اعزب</td>
-                        <td>ذكر</td>
-                        <td>ليسبلس</td>
-                        <td>1</td>
-
-                    </tr>
-                    <tr>
-                        <td class="text-center">
-                            <form action="">
-                                <input type="checkbox" style="width: 16px; height: 16px;    ">
-                            </form>
-                        </td>
-                        <td class="d-flex justify-content-center align-items-center">
-                            <a href="#" class="edit print h-100" >
-                                <i class="fa-solid fa-print"></i>
-                            </a>
-                            <a href="edit_emp.html" class="edit">
-                                <i class="fa-solid fa-pencil"></i>
-                            </a>
-                            <form action="../../PHP/script.php" method="POST">
-                                <button type="submit" style="border:none; outline:none" class="delete" name="Delete" value="1">
-                                    <i class="fa-solid fa-trash-can"></i>
-                                </button>
-                            </form>
-                        </td>
-                        <td>1</td>
-                        <td>جهاد شرع الله</td>
-                        <td>اعزب</td>
-                        <td>ذكر</td>
-                        <td>ليسبلس</td>
-                        <td>1</td>
-
-                    </tr>
-                    <tr>
-                        <td class="text-center">
-                            <form action="">
-                                <input type="checkbox" style="width: 16px; height: 16px;    ">
-                            </form>
-                        </td>
-                        <td class="d-flex justify-content-center align-items-center">
-                            <a href="#" class="edit print h-100" >
-                                <i class="fa-solid fa-print"></i>
-                            </a>
-                            <a href="edit_emp.html" class="edit">
-                                <i class="fa-solid fa-pencil"></i>
-                            </a>
-                            <form action="../../PHP/script.php" method="POST">
-                                <button type="submit" style="border:none; outline:none" class="delete" name="Delete" value="1">
-                                    <i class="fa-solid fa-trash-can"></i>
-                                </button>
-                            </form>
-                        </td>
-                        <td>1</td>
-                        <td>جهاد شرع الله</td>
-                        <td>اعزب</td>
-                        <td>ذكر</td>
-                        <td>ليسبلس</td>
-                        <td>1</td>
-
-                    </tr>
-                    <tr>
-                        <td class="text-center">
-                            <form action="">
-                                <input type="checkbox" style="width: 16px; height: 16px;    ">
-                            </form>
-                        </td>
-                        <td class="d-flex justify-content-center align-items-center">
-                            <a href="#" class="edit print h-100" >
-                                <i class="fa-solid fa-print"></i>
-                            </a>
-                            <a href="edit_emp.html" class="edit">
-                                <i class="fa-solid fa-pencil"></i>
-                            </a>
-                            <form action="../../PHP/script.php" method="POST">
-                                <button type="submit" style="border:none; outline:none" class="delete" name="Delete" value="1">
-                                    <i class="fa-solid fa-trash-can"></i>
-                                </button>
-                            </form>
-                        </td>
-                        <td>1</td>
-                        <td>جهاد شرع الله</td>
-                        <td>اعزب</td>
-                        <td>ذكر</td>
-                        <td>ليسبلس</td>
-                        <td>1</td>
-
-                    </tr>
-                    <tr>
-                        <td class="text-center">
-                            <form action="">
-                                <input type="checkbox" style="width: 16px; height: 16px;    ">
-                            </form>
-                        </td>
-                        <td class="d-flex justify-content-center align-items-center">
-                            <a href="#" class="edit print h-100" >
-                                <i class="fa-solid fa-print"></i>
-                            </a>
-                            <a href="edit_emp.html" class="edit">
-                                <i class="fa-solid fa-pencil"></i>
-                            </a>
-                            <form action="../../PHP/script.php" method="POST">
-                                <button type="submit" style="border:none; outline:none" class="delete" name="Delete" value="1">
-                                    <i class="fa-solid fa-trash-can"></i>
-                                </button>
-                            </form>
-                        </td>
-                        <td>1</td>
-                        <td>جهاد شرع الله</td>
-                        <td>اعزب</td>
-                        <td>ذكر</td>
-                        <td>ليسبلس</td>
-                        <td>1</td>
-
-                    </tr>
-                    <tr>
-                        <td class="text-center">
-                            <form action="">
-                                <input type="checkbox" style="width: 16px; height: 16px;    ">
-                            </form>
-                        </td>
-                        <td class="d-flex justify-content-center align-items-center">
-                            <a href="#" class="edit print h-100" >
-                                <i class="fa-solid fa-print"></i>
-                            </a>
-                            <a href="edit_emp.html" class="edit">
-                                <i class="fa-solid fa-pencil"></i>
-                            </a>
-                            <form action="../../PHP/script.php" method="POST">
-                                <button type="submit" style="border:none; outline:none" class="delete" name="Delete" value="1">
-                                    <i class="fa-solid fa-trash-can"></i>
-                                </button>
-                            </form>
-                        </td>
-                        <td>1</td>
-                        <td>جهاد شرع الله</td>
-                        <td>اعزب</td>
-                        <td>ذكر</td>
-                        <td>ليسبلس</td>
-                        <td>1</td>
-
-                    </tr>
-                    <tr>
-                        <td class="text-center">
-                            <form action="">
-                                <input type="checkbox" style="width: 16px; height: 16px;    ">
-                            </form>
-                        </td>
-                        <td class="d-flex justify-content-center align-items-center">
-                            <a href="#" class="edit print">
-                                <i class="fa-solid fa-print"></i>
-                            </a>
-                            <a href="edit_emp.html" class="edit">
-                                <i class="fa-solid fa-pencil"></i>
-                            </a>
-                            <form action="../../PHP/script.php" method="POST">
-                                <button type="submit" style="border:none; outline:none" class="delete" name="Delete" value="1">
-                                    <i class="fa-solid fa-trash-can"></i>
-                                </button>
-                            </form>
-                        </td>
-                        <td>2</td>
-                        <td>علي</td>
-                        <td>ALI01</td>
-                        <td>ali@gmail.com</td>
-                        <td>922502219</td>
-                        <td>مشرف</td>
-
-                    </tr>
+                    @endforeach
                     </tbody>
                 </table>
             </div>

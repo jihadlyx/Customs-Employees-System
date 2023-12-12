@@ -9,27 +9,29 @@
 @section('settings-content')
     <div class="wrapper-two">
         <h3 class="title-main">إضافة مراكز العمل</h3>
-        <form class="row g-4 needs-validation" novalidate>
-            <div class="col-md-2">
+        <form method="post" action="{{route("stations.store")}}" class="row g-4 needs-validation" novalidate>
+        @csrf
+        <div class="col-md-2">
                 <label for="validationCustom02" class="form-label">رقم</label>
-                <input type="text" class="form-control" id="validationCustom02" required>
+                <input name="id_station" type="text" class="form-control" id="validationCustom02" required>
                 <div class="valid-feedback">
                     Looks good!
                 </div>
             </div>
-            <div class="col-md-3">
-                <label for="validationCustom02" class="form-label">المركز</label>
-                <input type="text" class="form-control" id="validationCustom02" required>
+                <div class="col-md-3">
+                    <label for="validationCustom02" class="form-label">المركز</label>
+                <input name="name_station" type="text" class="form-control" id="validationCustom02" required>
                 <div class="valid-feedback">
                     Looks good!
                 </div>
             </div>
             <div class="col-md-2">
                 <label for="validationCustom04" class="form-label">المدينة</label>
-                <select class="form-select" id="validationCustom04" required>
+                <select name="id_city" class="form-select" id="validationCustom04" required>
                     <option selected disabled value="">اختر</option>
-                    <option value="0">زليتن</option>
-                    <option value="1">طرابلس</option>
+                    @foreach ($cities as $city )
+                    <option value= "{{$city->id_city}}" >{{$city->city_name}}</option>
+                    @endforeach
                 </select>
                 <div class="invalid-feedback">
                     Please select a valid state.
@@ -47,37 +49,34 @@
                     <th>#</th>
                     <th>الرقم</th>
                     <th>المركز</th>
+                    <th>المدينه</th>
                 </tr>
                 </thead>
+
                 <tbody>
-                <tr>
-                    <td class="d-flex justify-content-center align-items-center">
-                        <a href="stations/show" class="edit">
-                            <i class="fa-solid fa-pencil"></i>
-                        </a>
-                        <form action="../../PHP/script.php" method="POST">
-                            <button type="submit" style="border:none; outline:none" class="delete" name="Delete" value="1">
-                                <i class="fa-solid fa-trash-can"></i>
-                            </button>
-                        </form>
-                    </td>
-                    <td>1</td>
-                    <td>جهاد شرع الله</td>
-                </tr>
-                <tr>
-                    <td class="d-flex justify-content-center align-items-center">
-                        <a href="stations/show" class="edit">
-                            <i class="fa-solid fa-pencil"></i>
-                        </a>
-                        <form action="../../PHP/script.php" method="POST">
-                            <button type="submit" style="border:none; outline:none" class="delete" name="Delete" value="1">
-                                <i class="fa-solid fa-trash-can"></i>
-                            </button>
-                        </form>
-                    </td>
-                    <td>2</td>
-                    <td>علي</td>
-                </tr>
+
+               @foreach ($stations as $station )
+               <tr>
+                   <td class="d-flex justify-content-center align-items-center">
+                       <!-- Button to Open the Modal -->
+                       <button type="button" class="edit" data-bs-toggle="modal" data-bs-target="#StationEdit{{$station->id_station}}" data-bs-whatever="@mdo">
+                           <i class="fa-solid fa-edit"></i>
+                       </button>
+                       <button type="button" class="delete" data-bs-toggle="modal" data-bs-target="#StationDelete{{$station->id_station}}" data-bs-whatever="@mdo">
+                           <i class="fa-solid fa-trash-can"></i>
+                       </button>
+                   </td>
+                <td>{{$station->id_station }}</td>
+                <td>{{$station->name_station }}</td>
+<<<<<<< HEAD
+                <td>{{$station->city->city_name}}</td>
+=======
+                <td>{{$station->getCity->city_name }}</td>
+>>>>>>> 0b39e7ae21d61a433e07cdaff606732c0c27284c
+            </tr>
+               @include('settings.stations.modal.edit_station')
+               @include('settings.stations.modal.delete_station')
+            @endforeach
                 </tbody>
             </table>
         </div>

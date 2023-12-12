@@ -1,5 +1,5 @@
 <div class="sidebar">
-    <h3>نظام شؤون الموظفين</h3>
+    <h3>نظام إدارة الموارد البشرية</h3>
     <ul>
         <li>
             <a class="@yield('active_dash')" href="/dashboard">
@@ -29,14 +29,14 @@
 
         </li>
         <li>
-            <a class="@yield('active_')" href="">
+            <a class="@yield('active_absence')" href="/absence">
                 <i class="fa-solid fa-box-open"></i>
                 <span>سجل الغياب</span>
             </a>
 
         </li>
         <li>
-            <a class="@yield('active_cert')" href="certs">
+            <a class="@yield('active_cert')" href="/certs">
                 <i class="fa-solid fa-box-open"></i>
                 <span>المؤهلات والدورات</span>
             </a>
